@@ -19,11 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# Valores leídos desde el archivo .env
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=Csv())
+# Valores leídos desde el archivo .env o configurados directamente para pruebas
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-key-placeholder')
+DEBUG = config('DEBUG', default=True, cast=bool)
+
+# Actualizamos ALLOWED_HOSTS para incluir tu IP local, localhost y el emulador de Android
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.18.23', '10.0.2.2', 'localhost']
+
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 
 # Application definition
